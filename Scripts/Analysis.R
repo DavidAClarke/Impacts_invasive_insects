@@ -34,7 +34,7 @@ library(ggpubr)
 library(MASS)
 #library(FactoMineR)
 #library(factoextra)
-#library(igraph)
+library(igraph)
 
 ########################################### Load data ################################################
 #~# Load impact data
@@ -566,58 +566,44 @@ SpecDist <- EICAT.nonDD %>%
 #              SECTION 3: Figures                                  #
 #                                                                  #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#Network plot for order, mechanism, severity (test) (requires iGraph)
-# test <- Impacts.nonDD %>% 
-#         dplyr:: select(Order, Mechanism, Severity) %>% 
-#         unite("z", Order, Mechanism, Severity, sep = ";")
-# df <- read.csv2(text = test$z, header = F)
-# m <- as.matrix(df)
-# g <- graph_from_edgelist(rbind(m[,1:2], m[,2:3]), directed = F)
-# l <- layout_with_sugiyama(g, ceiling(match(V(g)$name, m)/nrow(m)))
-# plot(g, layout=-l$layout[,2:1])
-# 
-# 
-# test2 <- Impacts.nonDD %>% 
-#          dplyr:: select(Order, Mechanism) %>%
-#          group_by(Order, Mechanism) %>%
-#          count(Order, Mechanism)
-# test2.df <- xtabs(n ~ Order + Mechanism, test2)
-# 
-# 
-# test3 <- Impacts.nonDD %>% 
-#          dplyr:: select(Order, Mechanism, Severity) %>%
-#          group_by(Order, Mechanism, Severity) %>%
-#          summarise(weight = n()) %>% 
-#          ungroup()
-# 
-# Node_Order <- Impacts.nonDD %>%
-#               dplyr::select(Order) %>%
-#               distinct(Order = Order, .keep_all = T) %>%
-#               rowid_to_column("id")
-# 
-# Node_Mechanism <- Impacts.nonDD %>%
-#                   dplyr::select(Mechanism) %>%
-#                   distinct(Mechanism = Mechanism, .keep_all = T) %>%
-#                   rowid_to_column("id")
-# 
-# Node_Severity <- Impacts.nonDD %>%
-#                  dplyr::select(Severity) %>%
-#                  distinct(Severity = Severity, .keep_all = T) %>%
-#                  rowid_to_column("id")
-# 
-# edges <- test3 %>% 
-#          left_join(Node_Order, by = c("Order")) %>% 
-#          rename(from = id)
-# edges <- edges %>% 
-#          left_join(Node_Mechanism, by = c("Mechanism")) %>% 
-#          rename(fromto = id)
-# edges <- edges %>% 
-#          left_join(Node_Severity, by = c("Severity")) %>% 
-#          rename(to = id)
-# 
-# edges <- dplyr::select(edges, from, fromto, to, weight)
-# 
-# routes_tidy <- tbl_graph(nodes = Node_Order, edges = edges, directed = TRUE)
+#Network plot for order, family, mechanism, severity (requires iGraph)
+#Test using order and mechanism
+test <- Impacts.nonDD %>%
+  group_by(Order, Mechanism) %>%
+  summarise(Freq = n()) %>%
+  ungroup()
+
+test_igraph <- graph_from_data_frame(d = test, directed = T)
+deg <- degree(test_igraph, mode = "all")
+V(test_igraph)$size <- nums
+EFreq <- E(test_igraph)$Freq
+EFreqL <- log1p(EFreq)
+E(test_igraph)$width <- EFreqL
+V(test_igraph)$color <- c(rep("lightblue", 11), rep("lightyellow", 11)) #change colours
+
+Vert.order <- c("Hymenoptera", "Hemiptera", "Coleoptera", "Diptera", "Lepidoptera", 
+                "Mantodea", "Thysanoptera", "Blattodea", "Psocodea", "Dermaptera", 
+                "Siphonaptera", "Competition","Herbivory", "Predation", "Parasitism",
+                "Other","Transmission of disease","Interaction with other alien species",
+                "Facilitation of native species", "Hybridisation",
+                "Chemical/physical/structural impact on ecosystem",
+                "Poisoning/toxicity")
+
+lab <- c("Blattodea","Coleoptera","Dermaptera","Diptera","Hemiptera","Hymenoptera",
+         "Lepidoptera", "Mantodea","Psocodea", "Siphonaptera","Thysanoptera",
+         "Competition","Herbivory","Predation","Transmission of disease",
+         "Facilitation of native species","Parasitism", "Chem", "Int", "Other", "Poison",
+         "Hybrid")
+
+nums <- c(6,115,1,64,161,437,59,12,2,1,9,315,281,110,23,18,45,7,20,25,7,16)
+coords <- layout_in_circle(test_igraph, order = Vert.order)
+
+plot(test_igraph, 
+     edge.arrow.size = 0.1, 
+     layout = coords, 
+     vertex.size = log1p(V(test_igraph)$size)*3, 
+     vertex.label = NA, 
+     edge.curved = 0.5)
 
 
 #Search returns vs impact studies
