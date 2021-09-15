@@ -12,7 +12,7 @@ library(ggpol) #facet_share
 library(ggpubr) #balloon plots
 #library(ggalluvial)
 library(MASS)
-#library(igraph)
+
 
 #Package "rms" needs to be installed
 
@@ -63,7 +63,7 @@ source("Scripts/severity_range.R")
 #Examining ordinality assumption (Figure)
 ord_assum
 
-#Ordinal logstic regression results
+#Ordinal logistic regression results
 ctable <- cbind(ctable, "p value" = p)
 ci <- confint(m)
 
