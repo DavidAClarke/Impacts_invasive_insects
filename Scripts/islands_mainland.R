@@ -13,9 +13,9 @@ Impact_landmass <- Impacts.nonDD %>%
   count(LandmassType, Severity)
 
 #loglinear analysis
-fit.5 <- glm(n ~ factor(Severity) + factor(LandmassType), data = Impact_landmass, family = poisson)
-pchisq(deviance(fit.5), df = df.residual(fit.5), lower.tail = F)
-anova(fit.5, test = "Chisq")
+fit <- glm(n ~ factor(Severity) + factor(LandmassType), data = Impact_landmass, family = poisson)
+pchisq(deviance(fit), df = df.residual(fit), lower.tail = F)
+anova(fit, test = "Chisq")
 #Independence model fits well
 
 # Islands vs Continents
