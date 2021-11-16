@@ -10,7 +10,6 @@ library(readxl)
 library(tmap)
 library(ggpol) #facet_share
 library(ggpubr) #balloon plots
-#library(ggalluvial)
 library(MASS)
 #Package "rms" needs to be installed
 
@@ -53,7 +52,7 @@ source("Scripts/5.mechanism_severity.R")
 balloonMech 
 balloonSev
 
-source("Scripts/socioeconomic_pests.R")
+source("Scripts/6.socioeconomic_pests.R")
 #Search returns vs socioeconomic pest status
 wilcox.test(SearchReturns ~ SEPest, data = Literature, conf.int = T)
 #Sample sizes are large, therefore, approximate normal and find z value
@@ -78,7 +77,7 @@ SE_lit
 #DD vs nonDD for socioeconomic pest yes/no (Figure)
 SE_info
 
-source("Scripts/islands_mainland.R")
+source("Scripts/7.islands_mainland.R")
 ##Do islands have more harmful impacts than mainland?
 anova(fit, test = "Chisq")
 #Independence model fits well
@@ -86,7 +85,7 @@ anova(fit, test = "Chisq")
 #Islands vs Continents (Figure)
 Isl_v_cont
 
-source("Scripts/severity_range.R")
+source("Scripts/8.severity_range.R")
 #Examining ordinality assumption (Figure)
 ord_assum
 
@@ -102,7 +101,7 @@ anova(m1,m) #m1 only contains intercept
 sev_range_var
 sev_range_pred 
 
-source("Scripts/world_maps.R")
+source("Scripts/9.world_maps.R")
 #Map of the world for number of alien insects per country
 GRIIS_map
 
