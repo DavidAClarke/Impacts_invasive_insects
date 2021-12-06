@@ -11,6 +11,7 @@ library(tmap)
 library(ggpol) #facet_share
 library(ggpubr) #balloon plots
 library(MASS)
+library(PNWColors)
 #Package "rms" needs to be installed
 
 ########################################### Load data ################################################
@@ -99,7 +100,8 @@ anova(m1,m) #m1 only contains intercept
 
 #Variation and prediction of maximum impact severity as function of range (Figures)
 sev_range_var
-sev_range_pred 
+sev_range_pred
+sev_range_comb #combined
 
 source("Scripts/9.world_maps.R")
 #Map of the world for number of alien insects per country
