@@ -62,10 +62,11 @@ sev_range_var <- ggplot(MaxSev_range, aes(x = Severity, y = AlienCountries)) +
         axis.text = element_text(size = 14)) +
   ylab("Number of countries with alien populations(log10)") +
   xlab("Maximum impact severity") +
-  guides("colour" = F)
+  guides("colour" = "none") +
+  scale_colour_manual(values = pnw_palette("Bay", 4))
 
 #Predicting maximum severity from how widespread a species is
-my_cols <- c("darkorchid4", "dodgerblue4", "aquamarine4", "yellow2")
+#my_cols <- c("darkorchid4", "dodgerblue4", "aquamarine4", "yellow2")
 sev_range_pred <- ggplot(data = lnewdat, aes(x = AlienCountries,y = Probability, group = Level)) +
   geom_line(aes(linetype = Level, col = Level)) +
   theme_bw() +
@@ -80,7 +81,7 @@ sev_range_pred <- ggplot(data = lnewdat, aes(x = AlienCountries,y = Probability,
         legend.text = element_text(size = 14),
         legend.position = "top") +
   scale_color_manual(name = "Impact Severity", 
-                     values = my_cols, 
+                     values = pnw_palette("Bay", 4), 
                      labels = c("Minimal Concern","Minor","Moderate","Major")) +
   scale_linetype_manual(name = "Impact Severity", 
                         values = c(1,2,3,4),
@@ -94,3 +95,6 @@ sev_range_pred <- ggplot(data = lnewdat, aes(x = AlienCountries,y = Probability,
   # annotate("point", x = 2, y = 0.35, colour = "aquamarine4") +
   # annotate("point", x = 98, y = 0.32, colour = "yellow2") +
   # annotate("point", x = 6, y = 0.09, colour = "yellow2")
+
+#Combined figures
+sev_range_comb <- ggarrange(sev_range_var, sev_range_pred, ncol = 1, nrow = 2)
