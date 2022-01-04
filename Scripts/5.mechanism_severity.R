@@ -32,7 +32,7 @@ ImpactMechanism <- Impacts.nonDD %>%
 #   spread(Mechanism, NumStudies) %>%
 #   mutate(across(everything(), ~replace_na(.x,0)))
 
-#Between Orders
+#Between Orders (for within Orders use "PropOrd" instead of "PropMech")
 balloonMech <- ggballoonplot(ImpactMechanism, size = "PropMech", fill = "NumStudies")+
   scale_fill_viridis_c(option = "D", begin = 1, end = 0) +
   theme_bw() +
@@ -47,7 +47,7 @@ balloonMech <- ggballoonplot(ImpactMechanism, size = "PropMech", fill = "NumStud
         legend.title = element_text(size = 16),
         legend.text = element_text(size = 14),
         legend.position = "top",
-        plot.margin = unit(c(1,1,1,1), "cm")) +
+  plot.margin = unit(c(1,1,1,1), "cm")) +
   guides(fill = guide_colorbar(order = 1),
          size = guide_legend(order = 2)) +
   ylab("Impact mechanism") +
@@ -71,6 +71,7 @@ ImpactSeverity <- Impacts.nonDD %>%
 #   spread(Severity, NumStudies) %>%
 #   mutate(across(everything(), ~replace_na(.x,0)))
 
+#Between Orders (for within Orders use "PropOrd" instead of "PropSev")
 balloonSev <- ggballoonplot(ImpactSeverity, size = "PropSev", fill = "NumStudies")+
   scale_fill_viridis_c(option = "C", begin = 1, end = 0) +
   theme_bw() +
@@ -90,3 +91,6 @@ balloonSev <- ggballoonplot(ImpactSeverity, size = "PropSev", fill = "NumStudies
          size = guide_legend(order = 2)) +
   ylab("Taxonomic order") +
   xlab("Impact severity")
+
+#Combination of plots
+mech_sev_comb <- ggarrange(balloonMech, balloonSev, ncol = 1, nrow = 2)
