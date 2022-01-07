@@ -20,9 +20,10 @@ Pool <- read_excel(file.path("Data", "Species_pool.xlsx"), sheet = "Pool")
 Literature <- read_excel(file.path("Data", "Assessment_information_FINAL.xlsx"), sheet = "Literature_searches")
 Impacts <- read_excel(file.path("Data", "Assessment_information_FINAL.xlsx"), sheet = "Assessment_results_input")
 Impact_Distribution <- read_excel(file.path("Data", "Assessment_information_FINAL.xlsx"), sheet = "Impact_distribution")
+# Distribution information obtained from Global Register of Introduced and Invasive Species (https://www.griis.org)
 Insect_Distribution <- read_excel(file.path("Data","Alien_insect_distribution.xlsx"), sheet = "Insect_distribution")
 
-#~# Load GADM level 0 shapefile
+#~# Load GADM level 0 shapefile (https://www.gadm.org)
 load(file.path("Data","lvl_0.RData"))
 
 #Convert shapefile to sf object
