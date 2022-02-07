@@ -52,6 +52,7 @@ RankSums <- Literature_SE %>%
 
 # Impact data preparation
 Impacts <- Impacts %>% 
+  mutate(PubYear = as.numeric(PubYear)) %>%
   mutate_if(is.character, as.factor) %>% 
   mutate(SocioEconomicPest = factor(SocioEconomicPest, levels = c("Yes", "No"))) %>%
   mutate(Order = factor(Order, levels = c("Blattodea","Coleoptera","Dermaptera",
@@ -65,8 +66,8 @@ Impacts <- Impacts %>%
   mutate(Confidence = factor(Confidence, levels = c("NA", "Low", "Medium", "High"))) %>%
   mutate(scientificName = as.character(scientificName)) %>%
   mutate(scientificNameID = as.character(scientificNameID)) %>%
-  mutate(PubID = as.character(PubID)) %>% 
-  mutate(PubYear = as.integer(PubYear))
+  mutate(PubID = as.character(PubID)) 
+  
 
 #Removing species considered to not have an alien populations  
 Impacts.noNA <- Impacts %>% 
@@ -83,7 +84,8 @@ Impacts.nonDD <- Impacts.noNA %>%
                                           "Diptera","Hemiptera","Hymenoptera",
                                           "Lepidoptera","Mantodea","Psocodea",
                                           "Siphonaptera","Thysanoptera"))) %>%
-  mutate(LandmassType = factor(LandmassType, levels = c("Continent", "Island")))
+  mutate(LandmassType = factor(LandmassType, levels = c("Continent", "Island"))) %>%
+  mutate(Confidence = factor(Confidence, levels = c("Low", "Medium", "High")))
 
 
 #Selecting only data deficient species
