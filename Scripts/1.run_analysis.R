@@ -51,9 +51,10 @@ lit_2
 
 source("Scripts/5.mechanism_severity.R")
 #Impact mechanism and severity variation among taxonomic orders (Figures)
-balloonMech 
-balloonSev
-mech_sev_comb
+# balloonMech 
+# balloonSev
+# mech_sev_comb
+mechnsev
 
 source("Scripts/6.socioeconomic_pests.R")
 #Search returns vs socioeconomic pest status
