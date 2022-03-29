@@ -18,7 +18,7 @@ conf_plot <- ggplot(Impacts.nonDD, aes(x = Confidence, fill = Confidence)) +
 minset <- Impacts.nonDD %>% dplyr::select(`Order`, `Mechanism`, `Severity`, `Confidence`)
 
 #Multiple correspondence analysis
-minsetMCA <- MCA(g, graph = F)
+minsetMCA <- MCA(minset, graph = F)
 
 catMCA <- fviz_mca_var(minsetMCA, col.var = "cos2",
              gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
