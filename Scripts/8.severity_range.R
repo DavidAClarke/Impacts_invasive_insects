@@ -97,4 +97,10 @@ sev_range_pred <- ggplot(data = lnewdat, aes(x = AlienCountries,y = Probability,
   # annotate("point", x = 6, y = 0.09, colour = "yellow2")
 
 #Combined figures
-sev_range_comb <- ggarrange(sev_range_var, sev_range_pred, ncol = 1, nrow = 2)
+sev_range_comb <- ggarrange(sev_range_var, 
+                            sev_range_pred, 
+                            ncol = 1, 
+                            nrow = 2, 
+                            labels = c("A", "B"), 
+                            common.legend = T,
+                            legend = "bottom")
