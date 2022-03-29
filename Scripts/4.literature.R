@@ -26,7 +26,7 @@ Literature_min_imp <- cbind(Literature_min, MaxSev)
 
 
 lit_2 <- ggplot(Literature_min_imp, aes(x = SearchReturns, y = Severity)) +
-  geom_boxplot() +
+  geom_boxplot(aes(colour = Severity)) +
   geom_point() +
   scale_x_log10() +
   theme_bw() +
@@ -38,6 +38,8 @@ lit_2 <- ggplot(Literature_min_imp, aes(x = SearchReturns, y = Severity)) +
         axis.title.x = element_text(size = 16),
         axis.title.y = element_text(size = 16),
         axis.text.x = element_text(size = 14, colour = "black"),
-        axis.text.y = element_text(size = 14, colour = "black")) +
+        axis.text.y = element_text(size = 14, colour = "black"),
+        legend.position = "none") +
   xlab("Number of search returns (log10)") +
-  ylab("Maximum impact severity")
+  ylab("Maximum impact severity") +
+  scale_colour_manual(values = pnw_palette("Bay", 4))
