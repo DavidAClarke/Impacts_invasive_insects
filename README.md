@@ -13,3 +13,5 @@ The following R packages will need to be installed prior to running these analys
 * ggpubr
 * MASS
 * rms
+
+Cite the data and code: [![DOI](https://zenodo.org/badge/367756845.svg)](https://zenodo.org/badge/latestdoi/367756845)
