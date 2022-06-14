@@ -14,7 +14,7 @@ library(MASS)
 library(PNWColors)
 #Package "rms" needs to be installed
 
-########################################### Load data ################################################
+########################################### Load data ###############################################
 #~# Load impact data
 Pool <- read_excel(file.path("Data", "Species_pool.xlsx"), sheet = "Pool")
 Literature <- read_excel(file.path("Data", "Assessment_information_FINAL.xlsx"), sheet = "Literature_searches")
