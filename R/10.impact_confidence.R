@@ -26,13 +26,13 @@ catMCA <- fviz_mca_var(minsetMCA, col.var = "cos2",
              ggtheme = theme_minimal(),
              title = "")
 
-indMCA <- fviz_mca_ind(minsetMCA, 
-             label = "none", # hide individual labels
-             habillage = "Confidence", # color by groups 
-             palette = c("#00AFBB", "#E7B800","#FC4E07"),
-             addEllipses = TRUE, ellipse.type = "confidence", #confidence ellipse around mean point
-             ggtheme = theme_minimal(),
-             title = "")
+# indMCA <- fviz_mca_ind(minsetMCA, 
+#              label = "none", # hide individual labels
+#              habillage = "Confidence", # color by groups 
+#              palette = c("#00AFBB", "#E7B800","#FC4E07"),
+#              addEllipses = TRUE, ellipse.type = "confidence", #confidence ellipse around mean point
+#              ggtheme = theme_minimal(),
+#              title = "")
 
 #Combine plots
 ggarrange(catMCA, indMCA, nrow = 2, ncol = 1)
