@@ -19,6 +19,11 @@ pchisq(69.454, df = 17, lower.tail = F)
 #significant interaction between order and DD. 
 #The probability of seeing such a change in deviance (69.834) if the models really were no different is remote.
 
+# the estimated odds ratio for any given taxonomic order having evidence of 
+# environmental impact, relative to being data deficient, was significant.
+# odds ratio
+exp(fit.2$coefficients[19])
+
 #For following plot
 DDvsNonDD <- species_assessed_min %>%
   dplyr::select(Order, DD, NotDD) %>%
