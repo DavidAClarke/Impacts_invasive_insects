@@ -35,8 +35,8 @@ ImpactMechanism <- Impacts.nonDD %>%
 #For bar chart
 OrderMech <- ImpactMechanism %>%
   dplyr::select(Mechanism, Order, NumStudies)
-comp1 <- ggplot(OrderMech, aes(x = reorder(Mechanism, NumStudies, function(x) -sum(x)), y = NumStudies, fill = Order)) +
-  geom_bar(position = "stack", stat = "identity") +
+comp1 <- ggplot(OrderMech, aes(x = reorder(Mechanism, NumStudies, function(x) -sum(x)), y = NumStudies)) +
+  geom_bar(aes(fill = Order),position = "fill", stat = "identity") +
   theme_bw() +
   theme(axis.text.y = element_text(colour = "black", size = 14),
         axis.text.x = element_text(colour = "black", size = 14, angle = 90, vjust = 0.5),
@@ -50,14 +50,13 @@ comp1 <- ggplot(OrderMech, aes(x = reorder(Mechanism, NumStudies, function(x) -s
         legend.text = element_text(size = 14),
         legend.position = "right")+#,
         #plot.margin = unit(c(1,1,1,1), "cm")) +
-  scale_y_continuous(expand = c(0,0),
-                     limits = c(0,250)) +
+  scale_y_continuous(expand = c(0,0)) +
   xlab("Impact mechanism") +
-  ylab("Number of impact studies") +
+  ylab("Proportion of impact studies") +
   scale_fill_manual("Taxonomic\norder", values = pnw_palette("Bay", 13)) 
 
-comp3 <- ggplot(OrderMech, aes(x = reorder(Order, NumStudies, function(x) -sum(x)), y = NumStudies, fill = Mechanism)) +
-  geom_bar(position = "stack", stat = "identity") +
+comp3 <- ggplot(OrderMech, aes(x = reorder(Order, NumStudies, function(x) -sum(x)), y = NumStudies)) +
+  geom_bar(aes(fill = Mechanism), position = "fill", stat = "identity") +
   theme_bw() +
   theme(axis.text.y = element_text(colour = "black", size = 14),
         axis.text.x = element_text(colour = "black", size = 14, angle = 90, vjust = 0.5),
@@ -71,10 +70,9 @@ comp3 <- ggplot(OrderMech, aes(x = reorder(Order, NumStudies, function(x) -sum(x
         legend.text = element_text(size = 14),
         legend.position = "top")+#,
   #plot.margin = unit(c(1,1,1,1), "cm")) +
-  scale_y_continuous(expand = c(0,0),
-                     limits = c(0,325)) +
+  scale_y_continuous(expand = c(0,0)) +
   xlab("Taxonomic order") +
-  ylab("Number of impact studies") +
+  ylab("Proportion of impact studies") +
   scale_fill_manual("Impact\nmechanism",values = rev(pnw_palette("Lake", 13)))
   
 
@@ -120,8 +118,8 @@ ImpactSeverity <- Impacts.nonDD %>%
 
 OrderSev <- ImpactSeverity %>%
   dplyr::select(Severity, Order, NumStudies)
-comp2 <- ggplot(OrderSev, aes(x = Severity, y = NumStudies, fill = Order)) +
-  geom_bar(position = "stack", stat = "identity", width = 0.4) +
+comp2 <- ggplot(OrderSev, aes(x = Severity, y = NumStudies)) +
+  geom_bar(aes(fill = Order),position = "fill", stat = "identity", width = 0.4) +
   theme_bw() +
   theme(axis.text.y = element_text(colour = "black", size = 14),
         axis.text.x = element_text(colour = "black", size = 14, angle = 90, vjust = 0.5),
@@ -135,10 +133,9 @@ comp2 <- ggplot(OrderSev, aes(x = Severity, y = NumStudies, fill = Order)) +
         legend.text = element_text(size = 14),
         legend.position = "right")+#,
         #plot.margin = unit(c(1,1,1,1), "cm")) +
-  scale_y_continuous(expand = c(0,0),
-                     limits = c(0,325)) +
+  scale_y_continuous(expand = c(0,0)) +
   xlab("Impact severity") +
-  ylab("Number of impact studies") +
+  ylab("Proportion of impact studies") +
   scale_fill_manual("Taxonomic\norder", values = pnw_palette("Bay", 13))
 
 MechSeverity <- Impacts.nonDD %>% 
@@ -153,7 +150,7 @@ MechSeverity <- Impacts.nonDD %>%
   rename(NumStudies = "n")
 
 comp4 <- ggplot(MechSeverity, aes(x = Severity, y = NumStudies, fill = Mechanism)) +
-  geom_bar(position = "stack", stat = "identity", width = 0.4) +
+  geom_bar(aes(fill = Mechanism),position = "fill", stat = "identity", width = 0.4) +
   theme_bw() +
   theme(axis.text.y = element_text(colour = "black", size = 14),
         axis.text.x = element_text(colour = "black", size = 14, angle = 90, vjust = 0.5),
@@ -167,10 +164,9 @@ comp4 <- ggplot(MechSeverity, aes(x = Severity, y = NumStudies, fill = Mechanism
         legend.text = element_text(size = 14),
         legend.position = "top")+#,
         #plot.margin = unit(c(1,1,1,1), "cm")) +
-  scale_y_continuous(expand = c(0,0),
-                     limits = c(0,325)) +
+  scale_y_continuous(expand = c(0,0)) +
   xlab("Impact severity") +
-  ylab("Number of impact studies") +
+  ylab("Proportion of impact studies") +
   scale_fill_manual("Impact\nmechanism", values = rev(pnw_palette("Lake", 13)))
   #scale_fill_viridis_d(option = "A", direction = -1) 
 
