@@ -19,6 +19,8 @@ library(geepack)
 library(rstatix)
 library(coin)
 library(DHARMa)
+library(FactoMineR)
+library(factoextra)
 #Package "rms" needs to be installed
 
 ########################################### Load data ###############################################
@@ -54,7 +56,7 @@ lvl_1_sf <- st_as_sf(lvl_1)
 lvl_1_sf <- st_transform(lvl_1_sf, crs = "+proj=moll") #Mollweide projection
 rm(lvl_1)
 
-#GDP (where is this from again?)
+#GDP
 # p <- "C:/Users/dcla0008/Dropbox/PhD/Thesis/Data/Chapter 2/Data/Socioeconomic/GDP_per_capita_PPP_1990_2015_v2.nc"
 # nc <- nc_open(p)
 # lon <- ncvar_get(nc, "longitude")
