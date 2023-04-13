@@ -55,6 +55,29 @@ comp1 <- ggplot(OrderMech, aes(x = reorder(Mechanism, NumStudies, function(x) -s
   ylab("Proportion of impact studies") +
   scale_fill_manual("Taxonomic\norder", values = pnw_palette("Bay", 13)) 
 
+#Alterative
+comp1 <- ggplot(OrderMech, aes(x = reorder(Mechanism, NumStudies, function(x) -sum(x)), y = NumStudies)) +
+  geom_bar(aes(fill = Mechanism), stat = "identity")+
+  facet_wrap("Order") +
+  coord_flip() +
+  theme_bw() +
+  theme(axis.text.y = element_text(colour = "black", size = 14),
+        axis.text.x = element_text(colour = "black", size = 14, angle = 90, vjust = 0.5),
+        axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.title.x = element_text(size = 16),
+        axis.title.y = element_text(size = 16),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size = 14),
+        legend.position = "none") +
+  scale_y_continuous(expand = c(0,0),
+                     limits = c(0,180)) +
+  ylab("Impact mechanism") +
+  xlab("Number of impact studies") +
+  scale_fill_manual("Taxonomic\norder", values = pnw_palette("Bay", 13))
+
 comp3 <- ggplot(OrderMech, aes(x = reorder(Order, NumStudies, function(x) -sum(x)), y = NumStudies)) +
   geom_bar(aes(fill = Mechanism), position = "fill", stat = "identity") +
   theme_bw() +
