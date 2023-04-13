@@ -21,27 +21,28 @@ library(coin)
 library(DHARMa)
 library(FactoMineR)
 library(factoextra)
+library(here)
 #Package "rms" needs to be installed
 
 ########################################### Load data ###############################################
 #~# Load impact data
-Pool <- read_excel(file.path("Data", "Species_pool.xlsx"), 
+Pool <- read_excel(here("Data", "Species_pool.xlsx"), 
                    sheet = "Pool")
-Literature <- read_excel(file.path("Data", "Assessment_information.xlsx"), 
+Literature <- read_excel(here("Data", "Assessment_information.xlsx"), 
                          sheet = "Literature_searches")
-Impacts <- read_excel(file.path("Data", "Assessment_information.xlsx"), 
+Impacts <- read_excel(here("Data", "Assessment_information.xlsx"), 
                       sheet = "Assessment_results_input")
-Impact_Distribution <- read_excel(file.path("Data", "Assessment_information.xlsx"), 
+Impact_Distribution <- read_excel(here("Data", "Assessment_information.xlsx"), 
                                   sheet = "Impact_distribution")
 
 # Obtained from Global Register of Introduced and Invasive Species
 #DOI: 10.5281/zenodo.63481164
-Insect_Distribution <- read.csv(file.path("Data","GRIIS - Country Compendium V1_0.csv")) %>%
+Insect_Distribution <- read.csv("C:/Users/daclarke@ltu.edu.au/Documents/projects/insect_impacts/GRIIS - Country Compendium V1_0.csv") %>%
   filter(class == "Insecta")
 
 ##Spatial data
 #~# Load GADM level 0 shapefile (https://www.gadm.org)
-load(file.path("Data","lvl_0.RData"))
+load("C:/Users/daclarke@ltu.edu.au/Documents/projects/insect_impacts/lvl_0.RData")
 
 #Convert shapefile to sf object
 lvl_0_sf <- st_as_sf(lvl_0)
@@ -49,7 +50,7 @@ lvl_0_sf <- st_transform(lvl_0_sf, crs = "+proj=moll") #Mollweide projection
 rm(lvl_0)
 
 #~# Load GADM level 1 shapefile (https://www.gadm.org)
-load(file.path("Data","lvl_1.RData"))
+load("C:/Users/daclarke@ltu.edu.au/Documents/projects/insect_impacts/lvl_1.RData")
 
 #Convert shapefile to sf object
 lvl_1_sf <- st_as_sf(lvl_1)
@@ -80,7 +81,7 @@ rm(lvl_1)
 #   mutate(Total_gdp = sum(lyr.1))
 
 #Ports
-p <- "C:/Users/dcla0008/Dropbox/PhD/Thesis/Data/Chapter 2/Data/high-seas-master/geo-data/XYPorts_CM_Cruse_anchorage_world2_final.shp"
+p <- "C:/Users/daclarke@ltu.edu.au/Documents/projects/insect_impacts/high-seas-master/geo-data/XYPorts_CM_Cruse_anchorage_world2_final.shp"
 ports <- st_read(p)
 ports_country <- ports %>% 
   group_by(ISO3166A3) %>% 
