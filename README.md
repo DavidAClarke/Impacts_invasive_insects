@@ -16,4 +16,4 @@ The following R packages will need to be installed prior to running these analys
 
 If used, please cite the data and code: [![DOI](https://zenodo.org/badge/367756845.svg)](https://zenodo.org/badge/latestdoi/367756845)
 
-Please also cite the associated scientific article (currently in preprint and under review) Associated with the preprint Clarke, D. A. & McGeoch, M. A. (2022). Invasive alien insects represent a clear but variable threat to biodiversity. _bioRxiv_. https://doi.org/10.1101/2022.06.16.496186
+Please also cite the associated scientific article (currently In Press): Clarke, D. A. & McGeoch, M. A. (2022). Invasive alien insects represent a clear but variable threat to biodiversity. _Current Research in Insect Science_. https://doi.org/10.1016/j.cris.2023.100065
